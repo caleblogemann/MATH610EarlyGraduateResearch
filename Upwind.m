@@ -2,12 +2,17 @@ a = 0;
 b = 1;
 N = 1000;
 deltaX = (b-a)/N;
-deltaT = .005;
-lambda = .01;
-nTimeSteps = round(.1/deltaT);
-disp(lambda*deltaT/deltaX);
-
 H = @(p) (1/2)*p.^2;
+
+% two conditions for stability
+% sqrt(alpha) > |H_p| = 2
+lambda = 2.1;
+
+% sqrt(alpha)*deltaT/deltaX < 1
+% nu = sqrt(alpha)*deltaT/deltaX = .9
+nu = .9;
+deltaT = (nu*deltaX)/lambda;
+nTimeSteps = round(.1/deltaT);
 
 ul = 2;
 ur = 1;
@@ -48,6 +53,6 @@ end
 
 % plot each time step
 for n=1:nTimeSteps+1
-    plot(x,p(:,n));
-    pause
+    plot(x,p(:,n), 'Linewidth', 2);
+    pause(.05);
 end
