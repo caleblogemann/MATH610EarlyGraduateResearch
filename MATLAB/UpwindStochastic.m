@@ -1,4 +1,4 @@
-H = @(p) (1/2)*p.^2;
+%H = @(p,S) (1/2)*p.^2;
 ul = 1;
 ur = -1;
 sigma = .1;
@@ -33,7 +33,10 @@ N = 7;
 % set up initial conditions
 q = zeros(2*(N+1), Nx, nTimeSteps+1);
 q(1,:,1) = pExact(x, z, 0);
-q(2,:,1) = H(q(1,:,1));
+q(2,:,1) = sigma;
+for i=1:Nx
+    q(N+2:end,i,1) = H(q(1:N+1,i,1), S);
+end
 
 A = [zeros(N+1), eye(N+1); alpha*eye(N+1), zeros(N+1)];
 delta = deltaT/deltaX;
@@ -49,19 +52,22 @@ for n = 1:nTimeSteps
     q(:,Nx,n+1)=q(:,Nx,n) - delta/2*(A*q(:,Nx,n) - A*q(:,Nx-1,n)) + delta^2/2*(A^2*(-q(:,Nx,n) + q(:,Nx-1,n)));
    
     % instant relaxation
-    % w = H(p)
-    q(N+2:end,:,n+1) = H(q(1:N+1,:,n+1));
+    % w = H(p)'
+    for i=1:Nx
+        q(N+2:end,i,n+1) = H(q(1:N+1,i,n+1), S);
+    end
 end
+
 % compute u at time T
-u = cumsum(q(1,:,end)*deltaX);
-figure(1);
-plot(x,u);
+%u = cumsum(q(1,:,end)*deltaX);
+%figure(1);
+%plot(x,u);
 
 % plot at time T
-figure(2);
-plot(x',q(1,:,end),'ro', 'Linewidth', 2);
-hold on
-plot(x,pExact(x,z,T),'Linewidth', 2);
+%figure(2);
+%plot(x',q(1,:,end),'ro', 'Linewidth', 2);
+%hold on
+%plot(x,pExact(x,z,T),'Linewidth', 2);
 %xlim([.3,.7]);
 
-p = @(n, i, z) sum(q(1:N+1,i,n).*repmat(legendreP(0:N,z)',1,length(i)));
+%p = @(n, i, z) sum(q(1:N+1,i,n).*repmat(legendreP(0:N,z)',1,length(i)));
