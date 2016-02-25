@@ -30,3 +30,25 @@ p0(2,:) = sigma;
 % set ending time
 T = .3;
 q = HamiltonJacobiInstantRelaxation(alpha, @(p)H(p,S), N, Nx, deltaX, p0, T);
+
+figure
+subplot(2,2,1)
+hold on
+plot(x,deltaX*cumsum(q(1,:,end)), 'ro')
+xlim([.3,.7]);
+title('Eu');
+subplot(2,2,2)
+plot(x,deltaX*cumsum(q(2,:,end)),'ro')
+title('Su');
+xlim([.3,.7]);
+hold on
+subplot(2,2,3)
+plot(x,q(1,:,end),'ro')
+title('Ep');
+xlim([.3,.7]);
+hold on
+subplot(2,2,4)
+plot(x,q(2,:,end),'ro')
+title('Sp')
+xlim([.3,.7])
+hold off
