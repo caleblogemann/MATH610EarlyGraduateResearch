@@ -6,7 +6,7 @@ sigma = .1;
 % spacial discritization
 a = 0;
 b = 1;
-Nx = 200;
+Nx = 500;
 deltaX = (b-a)/Nx;
 x = ((1:Nx)-(1/2))*deltaX;
 

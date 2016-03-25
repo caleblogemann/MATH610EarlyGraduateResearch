@@ -1,14 +1,4 @@
-function [q] = HamiltonJacobiInstantRelaxation(alpha, H, N, Nx, hx, p0, T)
-    % Input checking/parsing requires my personal utility functions
-    %p = inputParser();
-    %p.addRequired('alpha', @Utils.isPositiveNumber);
-    %p.addRequired('H', @Utils.isFunctionHandle);
-    %p.addRequired('N', @Utils.isPositiveInteger);
-    %p.addRequired('Nx', @Utils.isPositiveInteger);
-    %p.addRequired('hx', @Utils.isPositiveNumber);
-    %p.addRequired('p0', @Utils.isMatrix);
-    %p.addRequired('T', @Utils.isPositiveNumber);
-    %p.parse(alpha, H, N, Nx, hx, p0, T);
+function [q] = IMEX2(alpha, H, N, Nx, hx, p0, T)
 
     % make sure p0 is correct size
     if(~isequal(size(p0),[N+1,Nx]))
@@ -39,8 +29,22 @@ function [q] = HamiltonJacobiInstantRelaxation(alpha, H, N, Nx, hx, p0, T)
     % system is q_t + A*q_x = 0
     A = [zeros(N+1), eye(N+1); alpha*eye(N+1), zeros(N+1)];
 
+    aTilde = zeros(3);
+    aTilde(3,2) = 1;
+    a = 1/2*eye(3);
+    a(2,1) = -1/2;
+    a(3,2) = 1/2;
+    wTilde = [0, 1/2, 1/2];
+    w = [0, 1/2, 1/2];
+
+    C = eye((N+1)^2);
+    C(1:N+1, 1:N+1) = 0;
+
     % time stepping
     for n = 1:Nt
+        HHat = cell2mat(arrayfun(@(i) H(q(1:N+1,i,n)), 1:Nx, 'UniformOutput', false));
+        
+        u1 = q(:,:,n) + 1/epsilon * ht * a(1,1) * (-1 * C * q(:,:,n) + 
         q(:,1,n+1)=q(:,1,n) - ht/(2*hx)*(A*q(:,2,n) - A*q(:,1,n)) + (ht/hx)^2/2*(A^2*(q(:,2,n) - q(:,1,n)));
         for i = 2:Nx-1
             q(:,i,n+1) = q(:,i,n) - ht/(2*hx)*(A*q(:,i+1,n) - A*q(:,i-1,n)) + (ht/hx)^2/2*(A^2*(q(:,i+1,n) - 2*q(:,i,n) + q(:,i-1,n)));
