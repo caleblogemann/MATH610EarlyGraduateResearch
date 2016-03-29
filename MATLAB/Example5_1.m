@@ -21,6 +21,7 @@ uExact = @(x, z, t) (x <= .5 + sigma*z*t)*((ul + sigma*z)*x ...
 % set up parameters for method
 alpha = 1.5;
 N = 7;
+epsilon = .0001;
 
 % get initial values of p
 p0 = zeros(N+1,Nx);
@@ -29,7 +30,7 @@ p0(2,:) = sigma;
 
 % set ending time
 T = .3;
-q = HamiltonJacobiInstantRelaxation(alpha, @(p)H(p,S), N, Nx, deltaX, p0, T);
+q = HamiltonJacobiInstantRelaxation(alpha, @(p)HExample1(p,S), N, Nx, deltaX, p0, T, epsilon, @imex1Matrix);
 
 figure
 subplot(2,2,1)

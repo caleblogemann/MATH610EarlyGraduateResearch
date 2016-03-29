@@ -1,58 +1,32 @@
-function [q] = IMEX2(alpha, H, N, Nx, hx, p0, T)
+function [q] = imex2(q, A, H, N, Nt, Nx, ht, hx, epsilon)
+    p = q(1:N+1,:,:);
+    w = q(N+2:end,:,:);
 
-    % make sure p0 is correct size
-    if(~isequal(size(p0),[N+1,Nx]))
-        error('p0 is incorrect size');
-    end
+    alpha = A(N+2,1);
 
-    % ht is the size of the time step
-    % Nt is the number of time steps ht to get to end time T
-    % determine ht in so make method stable
-    % sqrt(alpha)*ht/hx < 1
-    % nu = sqrt(alpha)*ht/hx = .9
-    nu = .2;
-    % ht must be smaller than htMax in order for nu < .9
-    htMax = (nu*hx)/sqrt(alpha);
-    % round Nt up
-    Nt = floor(T/htMax + 1);
-    % find exact deltaT to get to time=T in nTimesSteps time steps
-    ht = T/Nt;
-
-    % set up matrix to store all values of p and w
-    q = zeros(2*(N+1), Nx, Nt + 1);
-    % input initial conditions
-    q(1:N+1,:,1) = p0;
-    % find initial values of w based on H(p)
-    q(N+2:end,:,1) = cell2mat(arrayfun(@(i) H(q(1:N+1,i,1)), 1:Nx, 'UniformOutput', false));
-
-    % set up matrix to determine system
-    % system is q_t + A*q_x = 0
-    A = [zeros(N+1), eye(N+1); alpha*eye(N+1), zeros(N+1)];
-
-    aTilde = zeros(3);
-    aTilde(3,2) = 1;
-    a = 1/2*eye(3);
-    a(2,1) = -1/2;
-    a(3,2) = 1/2;
-    wTilde = [0, 1/2, 1/2];
-    w = [0, 1/2, 1/2];
-
-    C = eye((N+1)^2);
-    C(1:N+1, 1:N+1) = 0;
-
-    % time stepping
     for n = 1:Nt
-        HHat = cell2mat(arrayfun(@(i) H(q(1:N+1,i,n)), 1:Nx, 'UniformOutput', false));
-        
-        u1 = q(:,:,n) + 1/epsilon * ht * a(1,1) * (-1 * C * q(:,:,n) + 
-        q(:,1,n+1)=q(:,1,n) - ht/(2*hx)*(A*q(:,2,n) - A*q(:,1,n)) + (ht/hx)^2/2*(A^2*(q(:,2,n) - q(:,1,n)));
-        for i = 2:Nx-1
-            q(:,i,n+1) = q(:,i,n) - ht/(2*hx)*(A*q(:,i+1,n) - A*q(:,i-1,n)) + (ht/hx)^2/2*(A^2*(q(:,i+1,n) - 2*q(:,i,n) + q(:,i-1,n)));
-        end
-        q(:,Nx,n+1)=q(:,Nx,n) - ht/(2*hx)*(A*q(:,Nx,n) - A*q(:,Nx-1,n)) + (ht/hx)^2/2*(A^2*(-q(:,Nx,n) + q(:,Nx-1,n)));
+        Hpn = cell2mat(arrayfun(@(i) H(p(:,i,n)), 1:Nx, 'UniformOutput', false));
 
-        % instant relaxation
-        % w = H(p)
-        q(N+2:end,:,n+1) = cell2mat(arrayfun(@(i) H(q(1:N+1,i,n)), 1:Nx, 'UniformOutput', false));
+        w1 = (w(:,:,n) + ht/(2*epsilon) * Hpn)/(1 + ht/(2*epsilon));
+        w2 = (w(:,:,n) + ht/(2*epsilon) * w1)/(1 + ht/(2*epsilon));
+
+        % 2nd order CFD
+        w2x = CFD2(w2, hx);
+
+        p3 = p(:,:,n) + ht* w2x;
+
+        Hp3 = cell2mat(arrayfun(@(i) H(p3(:,i)), 1:Nx, 'UniformOutput', false));
+
+        p3x = CFD2(p3,hx);
+
+        w3 = (w(:,:,n) + ht*alpha*p3x + ht/(2*epsilon)*(Hpn + Hp3 - w2))/(1 + ht/(2*epsilon));
+
+        w3x = CFD2(w3, hx);
+        p2x = CFD2(p(:,:,n), hx);
+
+        p(:,:,n+1) = p(:,:,n) + ht/2 *(w2x + w3x);
+        w(:,:,n+1) = w(:,:,n) + ht/2 *alpha*(p2x + p3x) + ht/(2*epsilon) * (Hpn + Hp3 - (w2 + w3));
     end
+
+    q = [p; w];
 end
