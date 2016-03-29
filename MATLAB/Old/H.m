@@ -1,4 +1,4 @@
-function [Hp] = H(p,S)
+function [Hp] = H_Example1(p,S)
     N = length(p);
     Hp = zeros(N,1);
     for k = 1:N
