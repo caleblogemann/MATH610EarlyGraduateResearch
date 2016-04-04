@@ -1,4 +1,4 @@
-function [q] = HamiltonJacobiInstantRelaxation(alpha, H, N, Nx, hx, p0, T, epsilon, numericalMethod)
+function [q] = HamiltonJacobiInstantRelaxation(alpha, H, N, Nx, hx, p0, T, CFL, epsilon, numericalMethod)
     % Input checking/parsing requires my personal utility functions
     %p = inputParser();
     %p.addRequired('alpha', @Utils.isPositiveNumber);
@@ -18,11 +18,9 @@ function [q] = HamiltonJacobiInstantRelaxation(alpha, H, N, Nx, hx, p0, T, epsil
     % ht is the size of the time step
     % Nt is the number of time steps ht to get to end time T
     % determine ht in so make method stable
-    % sqrt(alpha)*ht/hx < 1
-    % nu = sqrt(alpha)*ht/hx = .9
-    nu = .2;
+    % CFL = sqrt(alpha)*ht/hx < 1
     % ht must be smaller than htMax in order for nu condition to be met
-    htMax = (nu*hx)/sqrt(alpha);
+    htMax = (CFL*hx)/sqrt(alpha);
     % round Nt up
     Nt = floor(T/htMax + 1);
     % find exact deltaT to get to time=T in nTimesSteps time steps

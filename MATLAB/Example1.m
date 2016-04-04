@@ -2,12 +2,20 @@
 ul = 1;
 ur = -1;
 sigma = .1;
-%H = @(p) arrayfun(1/2, 1:length(p));
+if ~exist('S')
+    SImport
+end
+
+% set up parameters for method
+alpha = 1.5;
+N = 7;
+Nx = 200;
+CFL = .4;
+epsilon = 1e-6;
 
 % spacial discritization
 a = 0;
 b = 1;
-Nx = 200;
 deltaX = (b-a)/Nx;
 x = ((1:Nx)-(1/2))*deltaX;
 
@@ -18,19 +26,16 @@ uExact = @(x, z, t) (x <= .5 + sigma*z*t)*((ul + sigma*z)*x ...
     -(ul + sigma*z)^2/2*t) + (x > .5 + sigma*z*t)*((ur + sigma*z)*x + ...
     .5*(ul - ur) - (ur + sigma*z)^2/2*t);
 
-% set up parameters for method
-alpha = 1.5;
-N = 7;
-epsilon = .0001;
-
 % get initial values of p
 p0 = zeros(N+1,Nx);
 p0(1,:) = pExact(x, 0, 0);
-p0(2,:) = sigma;
+if N > 0
+    p0(2,:) = sigma;
+end
 
 % set ending time
 T = .3;
-q = HamiltonJacobiInstantRelaxation(alpha, @(p)HExample1(p,S), N, Nx, deltaX, p0, T, epsilon, @imex1Matrix);
+q = HamiltonJacobiInstantRelaxation(alpha, @(p)HExample1(p,S), N, Nx, deltaX, p0, T, CFL, epsilon, @imex2);
 
 figure
 subplot(2,2,1)
