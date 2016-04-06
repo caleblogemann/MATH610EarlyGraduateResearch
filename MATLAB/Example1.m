@@ -10,7 +10,7 @@ end
 alpha = 1.5;
 N = 7;
 Nx = 200;
-CFL = .4;
+CFL = .2;
 epsilon = 1e-6;
 
 % spacial discritization

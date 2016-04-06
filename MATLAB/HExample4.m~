@@ -1,9 +1,0 @@
-function [ Hvalue ] = HExample4(p, N, sigma, z, w, phiz)
-H = @(p, i) (1 + sigma*z(i))*abs(p);
-
-integrand = @(p, i) H(p'*phiz(:,i), z(i))*phiz(:,i);
-
-Hvalue = cell2mat(arrayfun(@(z)integrand(p, z), z, 'UniformOutput', false))*w';
-
-end
-

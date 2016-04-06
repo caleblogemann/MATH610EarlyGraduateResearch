@@ -10,7 +10,7 @@ end
 alpha = 1.5;
 N = 7;
 Nx = 200;
-CFL = .4;
+CFL = .8;
 epsilon = 1e-7;
 
 % spacial discritization
@@ -36,7 +36,7 @@ end
 
 % set ending time
 T = .3;
-q = HamiltonJacobiInstantRelaxation(alpha, @(p)HExample1(p,S), N, Nx, deltaX, p0, T, CFL, epsilon, @imex2);
+q = HamiltonJacobiInstantRelaxation(alpha, @(p)HExample1(p,S), N, Nx, deltaX, p0, T, CFL, epsilon, @imex1);
 
 
 figure

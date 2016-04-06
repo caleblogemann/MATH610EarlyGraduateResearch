@@ -26,7 +26,7 @@ phiz = cell2mat(arrayfun(phi, z', 'UniformOutput', false));
 
 % set ending time
 T = 1;
-q = HamiltonJacobiInstantRelaxation(alpha, @(p)HExample4(p,sigma, z, w, phiz), N, Nx, deltaX, p0, T, CFL, epsilon, @LaxWendroff);
+q = HamiltonJacobiInstantRelaxation(alpha, @(p)HExample4(p,sigma, z, w, phiz), N, Nx, deltaX, p0, T, CFL, epsilon, @imex1);
 
 figure
 subplot(2,2,1)
