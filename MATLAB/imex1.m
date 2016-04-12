@@ -1,9 +1,5 @@
 function [q] = imex1(q, A, H, N, Nt, Nx, ht, hx, epsilon)
     [V, D] = eig(A);
-    % normalize V
-    %for i = 1:2*N+2
-    %    V(i,:) = V(i,:)/norm(V(i,:));
-    %end
     Dplus = max(zeros(size(D)), D);
     Dminus = min(zeros(size(D)), D);
     Aplus = V*Dplus*inv(V);

@@ -34,8 +34,8 @@ if N > 0
 end
 
 % set ending time
-T = .3;
-q = HamiltonJacobiInstantRelaxation(alpha, @(p)HExample1(p,S), N, Nx, deltaX, p0, T, CFL, epsilon, @imex2);
+T = .005;
+q = HamiltonJacobiInstantRelaxation(alpha, @(p)HExample1(p,S), N, Nx, deltaX, p0, T, CFL, epsilon, @imex3);
 
 figure
 subplot(2,2,1)
