@@ -36,23 +36,23 @@ end
 
 % set ending time
 T = .3;
-q = HamiltonJacobiInstantRelaxation(alpha, @(p)HExample1(p,S), N, Nx, deltaX, p0, T, CFL, epsilon, @imex1);
+q = HamiltonJacobiInstantRelaxation(alpha, @(p)HExample1(p,S), N, Nx, deltaX, p0, T, CFL, epsilon, @imex2Matrix);
 
 
 figure
 subplot(2,2,1)
 hold on
-plot(x,deltaX*cumsum(q(1,:,end)), 'ro')
+plot(x,deltaX*cumsum(q(1,:,end)), 'r')
 title('Eu');
 subplot(2,2,2)
-plot(x,deltaX*cumsum(q(2,:,end)),'ro')
+plot(x,deltaX*cumsum(q(2,:,end)),'r')
 title('Su');
 hold on
 subplot(2,2,3)
-plot(x,q(1,:,end),'ro')
+plot(x,q(1,:,end),'r')
 title('Ep');
 hold on
 subplot(2,2,4)
-plot(x,q(2,:,end),'ro')
+plot(x,q(2,:,end),'r')
 title('Sp')
 hold off
