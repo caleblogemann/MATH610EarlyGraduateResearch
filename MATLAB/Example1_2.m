@@ -10,7 +10,7 @@ end
 alpha = 1.5;
 N = 7;
 Nx = 200;
-CFL = .8;
+CFL = .2;
 epsilon = 1e-7;
 
 % spacial discritization
@@ -29,7 +29,7 @@ uExact = @(x, z, t) (x <= .5 + (ul + sigma*z)*t )*((ul + sigma*z)*x - (ul + sigm
 
 % get initial values of p
 p0 = zeros(N+1,Nx);
-p0(1,:) = arrayfun(@(i)pExact(x(i), 0, 0), 1:Nx);
+p0(1,:) = arrayfun(@(i)pExact(x(i), .05, 0), 1:Nx);
 if N > 0
     p0(2,:) = sigma;
 end
