@@ -1,8 +1,8 @@
 % specify problem
-sigma = 0;
+sigma = .2;
 
 % set up parameters for method
-alpha = 4;
+alpha = 1.5;
 N = 7;
 Nx = 200;
 CFL = .2;
@@ -21,12 +21,12 @@ p0(1,:) = cos(x);
 % set up Hamiltonian/Numerical integration for Hamiltonian
 nGaussLegendrePoints = 20;
 [z, w] = lgwt(nGaussLegendrePoints, -1, 1);
-phi = @(z) legendreP(0:N, z)';
+phi = @(z) sqrt((2*(0:N)+1)/2)'.*(legendreP(0:N, z))';
 phiz = cell2mat(arrayfun(phi, z', 'UniformOutput', false));
 
 % set ending time
 T = 1;
-q = HamiltonJacobiInstantRelaxation(alpha, @(p)HExample4(p,sigma, z, w, phiz), N, Nx, deltaX, p0, T, CFL, epsilon, @Upwind);
+q = HamiltonJacobiInstantRelaxation(alpha, @(p)HExample4(p,sigma, z, w, phiz), N, Nx, deltaX, p0, T, CFL, epsilon, @LaxWendroff);
 
 figure
 subplot(2,2,1)

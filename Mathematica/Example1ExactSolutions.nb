@@ -1,0 +1,663 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     24559,        654]
+NotebookOptionsPosition[     23850,        624]
+NotebookOutlinePosition[     24236,        641]
+CellTagsIndexPosition[     24193,        638]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ul", " ", "=", " ", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ur", " ", "=", " ", 
+   RowBox[{"-", "1"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Sigma]", " ", "=", " ", ".1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"p", "[", 
+   RowBox[{"x_", ",", "z_", ",", "t_"}], "]"}], ":=", 
+  TagBox[GridBox[{
+     {"\[Piecewise]", GridBox[{
+        {
+         RowBox[{"ul", " ", "+", " ", 
+          RowBox[{"\[Sigma]", " ", "z"}]}], 
+         RowBox[{"x", " ", "\[LessEqual]", " ", 
+          RowBox[{"0.5", " ", "+", " ", 
+           RowBox[{"\[Sigma]", " ", "z", " ", "t"}]}]}]},
+        {
+         RowBox[{"ur", " ", "+", " ", 
+          RowBox[{"\[Sigma]", " ", "z"}]}], 
+         RowBox[{"x", " ", ">", " ", 
+          RowBox[{"0.5", " ", "+", " ", 
+           RowBox[{"\[Sigma]", " ", "z", " ", "t"}]}]}]}
+       },
+       AllowedDimensions->{2, Automatic},
+       Editable->True,
+       GridBoxAlignment->{
+        "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}},
+          "RowsIndexed" -> {}},
+       GridBoxItemSize->{
+        "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+         "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.84]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}},
+       Selectable->True]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxItemSize->{
+     "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.35]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}],
+   "Piecewise",
+   DeleteWithContents->True,
+   Editable->False,
+   SelectWithContents->True,
+   Selectable->False]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"u", "[", 
+   RowBox[{"x_", ",", "z_", ",", "t_"}], "]"}], ":=", 
+  TagBox[GridBox[{
+     {"\[Piecewise]", GridBox[{
+        {
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"ul", " ", "+", " ", 
+             RowBox[{"\[Sigma]", " ", "z"}]}], ")"}], "x"}], " ", "-", " ", 
+          RowBox[{
+           FractionBox[
+            SuperscriptBox[
+             RowBox[{"(", 
+              RowBox[{"ul", " ", "+", " ", 
+               RowBox[{"\[Sigma]", " ", "z"}]}], ")"}], "2"], "2"], "t"}]}], 
+         RowBox[{"x", " ", "\[LessEqual]", " ", 
+          RowBox[{"0.5", " ", "+", " ", 
+           RowBox[{"\[Sigma]", " ", "z", " ", "t"}]}]}]},
+        {
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"ur", " ", "+", " ", 
+             RowBox[{"\[Sigma]", " ", "z"}]}], ")"}], "x"}], " ", "+", " ", 
+          RowBox[{".5", 
+           RowBox[{"(", 
+            RowBox[{"ul", " ", "-", " ", "ur"}], ")"}]}], " ", "-", " ", 
+          RowBox[{
+           FractionBox[
+            SuperscriptBox[
+             RowBox[{"(", 
+              RowBox[{"ur", " ", "+", " ", 
+               RowBox[{"\[Sigma]", " ", "z"}]}], ")"}], "2"], "2"], "t"}]}], 
+         RowBox[{"x", " ", ">", " ", 
+          RowBox[{"0.5", " ", "+", " ", 
+           RowBox[{"\[Sigma]", " ", "z", " ", "t"}]}]}]}
+       },
+       AllowedDimensions->{2, Automatic},
+       Editable->True,
+       GridBoxAlignment->{
+        "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}},
+          "RowsIndexed" -> {}},
+       GridBoxItemSize->{
+        "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+         "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.84]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}},
+       Selectable->True]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxItemSize->{
+     "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.35]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}],
+   "Piecewise",
+   DeleteWithContents->True,
+   Editable->False,
+   SelectWithContents->True,
+   Selectable->False]}], "\[IndentingNewLine]", 
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"p", "[", 
+      RowBox[{"x", ",", "z", ",", "t"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", ".3", ",", ".7"}], "}"}], ",", " ", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "1.1"}], ",", "1.1"}], "}"}]}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"z", ",", "0"}], "}"}], ",", 
+     RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.670088331513818*^9, 3.670088409821897*^9}, {
+   3.670088443545619*^9, 3.67008872308846*^9}, 3.6700900144015913`*^9, {
+   3.670091191696291*^9, 3.670091191798891*^9}, {3.670092153069323*^9, 
+   3.670092184670127*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`t$$ = 0., $CellContext`z$$ = 
+    0.20000000000000018`, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`t$$], 0, 1}, {{
+       Hold[$CellContext`z$$], 0}, -1, 1}}, Typeset`size$$ = {
+    720., {203., 223.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`t$9952$$ = 
+    0, $CellContext`z$9953$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`t$$ = 0, $CellContext`z$$ = 0}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`t$$, $CellContext`t$9952$$, 0], 
+        Hold[$CellContext`z$$, $CellContext`z$9953$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Plot[
+        $CellContext`p[$CellContext`x, $CellContext`z$$, $CellContext`t$$], \
+{$CellContext`x, 0.3, 0.7}, PlotRange -> {-1.1, 1.1}], 
+      "Specifications" :> {{$CellContext`t$$, 0, 
+         1}, {{$CellContext`z$$, 0}, -1, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{804., {345., 356.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.670088585351101*^9, {3.670088624248148*^9, 3.6700886875142107`*^9}, 
+   3.670088723762452*^9, 3.670090024915867*^9, 3.670091127488805*^9, 
+   3.6700921866208773`*^9, 3.6701600430934277`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"u", "[", 
+      RowBox[{"x", ",", "z", ",", "t"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", ".3", ",", ".7"}], "}"}], ",", " ", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", ".5"}], ",", "1.1"}], "}"}]}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"z", ",", "0"}], "}"}], ",", 
+     RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6700910848813753`*^9, 3.6700910852376432`*^9}, 
+   3.670091186954657*^9, {3.670092302348794*^9, 3.6700923096048737`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`t$$ = 0., $CellContext`z$$ = -1., 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`t$$], 0, 1}, {{
+       Hold[$CellContext`z$$], 0}, -1, 1}}, Typeset`size$$ = {
+    720., {209., 228.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`t$66861$$ = 
+    0, $CellContext`z$66862$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`t$$ = 0, $CellContext`z$$ = 0}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`t$$, $CellContext`t$66861$$, 0], 
+        Hold[$CellContext`z$$, $CellContext`z$66862$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Plot[
+        $CellContext`u[$CellContext`x, $CellContext`z$$, $CellContext`t$$], \
+{$CellContext`x, 0.3, 0.7}, PlotRange -> {-0.5, 1.1}], 
+      "Specifications" :> {{$CellContext`t$$, 0, 
+         1}, {{$CellContext`z$$, 0}, -1, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{804., {324., 336.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.670091089808426*^9, 3.67009113250281*^9, 3.670092193043751*^9, {
+   3.670092302983994*^9, 3.670092310136548*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ul", " ", "=", " ", 
+   RowBox[{"-", "1"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ur", " ", "=", " ", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Sigma]", " ", "=", " ", ".1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"p", "[", 
+   RowBox[{"x_", ",", "z_", ",", "t_"}], "]"}], ":=", 
+  TagBox[GridBox[{
+     {"\[Piecewise]", GridBox[{
+        {
+         RowBox[{"ul", " ", "+", " ", 
+          RowBox[{"\[Sigma]", " ", "z"}]}], 
+         RowBox[{"x", " ", "\[LessEqual]", " ", 
+          RowBox[{"0.5", " ", "+", " ", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"ul", " ", "+", " ", 
+              RowBox[{"\[Sigma]", " ", "z"}]}], ")"}], " ", "t"}]}]}]},
+        {
+         FractionBox[
+          RowBox[{"x", "-", ".5"}], "t"], 
+         RowBox[{
+          RowBox[{
+           RowBox[{"0.5", " ", "+", " ", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"ul", " ", "+", " ", 
+               RowBox[{"\[Sigma]", " ", "z"}]}], ")"}], " ", "t"}]}], "<", 
+           "x"}], " ", "&&", " ", 
+          RowBox[{"x", "\[LessEqual]", 
+           RowBox[{"0.5", " ", "+", " ", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"ur", " ", "+", " ", 
+               RowBox[{"\[Sigma]", " ", "z"}]}], ")"}], " ", "t"}]}]}]}]},
+        {
+         RowBox[{"ur", " ", "+", " ", 
+          RowBox[{"\[Sigma]", " ", "z"}]}], 
+         RowBox[{"x", " ", ">", " ", 
+          RowBox[{"0.5", " ", "+", " ", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"ur", " ", "+", " ", 
+              RowBox[{"\[Sigma]", " ", "z"}]}], ")"}], " ", "t"}]}]}]}
+       },
+       AllowedDimensions->{2, Automatic},
+       Editable->True,
+       GridBoxAlignment->{
+        "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}},
+          "RowsIndexed" -> {}},
+       GridBoxItemSize->{
+        "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+         "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.84]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}},
+       Selectable->True]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxItemSize->{
+     "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.35]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}],
+   "Piecewise",
+   DeleteWithContents->True,
+   Editable->False,
+   SelectWithContents->True,
+   Selectable->False]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"u", "[", 
+   RowBox[{"x_", ",", "z_", ",", "t_"}], "]"}], ":=", 
+  TagBox[GridBox[{
+     {"\[Piecewise]", GridBox[{
+        {
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"ul", " ", "+", " ", 
+             RowBox[{"\[Sigma]", " ", "z"}]}], ")"}], "x"}], "-", 
+          RowBox[{
+           FractionBox[
+            SuperscriptBox[
+             RowBox[{"(", 
+              RowBox[{"ul", " ", "+", " ", 
+               RowBox[{"\[Sigma]", " ", "z"}]}], ")"}], "2"], "2"], "t"}]}], 
+         RowBox[{"x", " ", "\[LessEqual]", " ", 
+          RowBox[{"0.5", " ", "+", " ", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"ul", " ", "+", " ", 
+              RowBox[{"\[Sigma]", " ", "z"}]}], ")"}], " ", "t"}]}]}]},
+        {
+         RowBox[{
+          RowBox[{".5", 
+           RowBox[{"(", 
+            RowBox[{"ul", " ", "+", " ", 
+             RowBox[{"\[Sigma]", " ", "z"}]}], ")"}]}], " ", "+", " ", 
+          RowBox[{
+           FractionBox["1", 
+            RowBox[{"2", "t"}]], 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{"x", " ", "-", " ", ".5"}], ")"}], "2"]}]}], 
+         RowBox[{
+          RowBox[{".5", " ", "+", " ", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"ul", " ", "+", " ", 
+              RowBox[{"\[Sigma]", " ", "z"}]}], ")"}], "t"}]}], "<", "x", 
+          "\[LessEqual]", 
+          RowBox[{".5", " ", "+", " ", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"ur", " ", "+", " ", 
+              RowBox[{"\[Sigma]", " ", "z"}]}], ")"}], "t"}]}]}]},
+        {
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"ur", " ", "+", " ", 
+             RowBox[{"\[Sigma]", " ", "z"}]}], ")"}], "x"}], " ", "+", " ", 
+          RowBox[{".5", 
+           RowBox[{"(", 
+            RowBox[{"ul", " ", "-", " ", "ur"}], ")"}]}], " ", "-", " ", 
+          RowBox[{
+           FractionBox[
+            SuperscriptBox[
+             RowBox[{"(", 
+              RowBox[{"ur", " ", "+", " ", 
+               RowBox[{"\[Sigma]", " ", "z"}]}], ")"}], "2"], "2"], "t"}]}], 
+         RowBox[{"x", " ", ">", " ", 
+          RowBox[{"0.5", " ", "+", " ", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"ur", " ", "+", " ", 
+              RowBox[{"\[Sigma]", " ", "z"}]}], " ", ")"}], "t"}]}]}]}
+       },
+       AllowedDimensions->{2, Automatic},
+       Editable->True,
+       GridBoxAlignment->{
+        "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}},
+          "RowsIndexed" -> {}},
+       GridBoxItemSize->{
+        "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+         "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.84]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}},
+       Selectable->True]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxItemSize->{
+     "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.35]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}],
+   "Piecewise",
+   DeleteWithContents->True,
+   Editable->False,
+   SelectWithContents->True,
+   Selectable->False]}], "\[IndentingNewLine]", 
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"p", "[", 
+      RowBox[{"x", ",", "z", ",", "t"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", "1"}], "}"}], ",", " ", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "1.1"}], ",", "1.1"}], "}"}]}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", ".5"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"z", ",", "0"}], "}"}], ",", 
+     RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.670088816087525*^9, 3.670088934665092*^9}, {
+   3.670088984913486*^9, 3.670089045557865*^9}, {3.67008913494538*^9, 
+   3.6700891389937162`*^9}, {3.670089241923908*^9, 3.6700892438288937`*^9}, {
+   3.670089411834695*^9, 3.670089419064033*^9}, 3.670092330232379*^9, {
+   3.670092420366647*^9, 3.670092431346181*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`t$$ = 
+    0.3005, $CellContext`z$$ = -0.31799999999999995`, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`t$$], 0, 0.5}, {{
+       Hold[$CellContext`z$$], 0}, -1, 1}}, Typeset`size$$ = {
+    720., {203., 223.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`t$15811$$ = 
+    0, $CellContext`z$15812$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`t$$ = 0, $CellContext`z$$ = 0}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`t$$, $CellContext`t$15811$$, 0], 
+        Hold[$CellContext`z$$, $CellContext`z$15812$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Plot[
+        $CellContext`p[$CellContext`x, $CellContext`z$$, $CellContext`t$$], \
+{$CellContext`x, 0, 1}, PlotRange -> {-1.1, 1.1}], 
+      "Specifications" :> {{$CellContext`t$$, 0, 
+         0.5}, {{$CellContext`z$$, 0}, -1, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{804., {319., 330.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.6700889381056013`*^9, {3.670089011777028*^9, 3.670089046242724*^9}, 
+   3.670089139571022*^9, 3.67008924541381*^9, 3.67008942441702*^9, 
+   3.6700923312175207`*^9, 3.670092433320166*^9, 3.670160231935536*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"u", "[", 
+      RowBox[{"x", ",", "z", ",", "t"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", "1"}], "}"}], ",", " ", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", ".8"}], ",", ".2"}], "}"}]}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", ".5"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"z", ",", "0"}], "}"}], ",", 
+     RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.670092342758469*^9, 3.67009234306971*^9}, {
+  3.6700924640946283`*^9, 3.670092474230466*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`t$$ = 0.0685, $CellContext`z$$ = 1., 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`t$$], 0, 0.5}, {{
+       Hold[$CellContext`z$$], 0}, -1, 1}}, Typeset`size$$ = {
+    720., {214., 234.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`t$78675$$ = 
+    0, $CellContext`z$78676$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`t$$ = 0, $CellContext`z$$ = 0}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`t$$, $CellContext`t$78675$$, 0], 
+        Hold[$CellContext`z$$, $CellContext`z$78676$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Plot[
+        $CellContext`u[$CellContext`x, $CellContext`z$$, $CellContext`t$$], \
+{$CellContext`x, 0, 1}, PlotRange -> {-0.8, 0.2}], 
+      "Specifications" :> {{$CellContext`t$$, 0, 
+         0.5}, {{$CellContext`z$$, 0}, -1, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{804., {330., 341.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.67009234372535*^9, {3.6700924648170757`*^9, 3.6700924745953417`*^9}}]
+}, Open  ]]
+},
+WindowSize->{1919, 1060},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification:>2. Inherited,
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 5774, 157, 362, "Input"],
+Cell[6357, 181, 2085, 42, 755, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8479, 228, 759, 21, 78, "Input"],
+Cell[9241, 251, 1995, 41, 714, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11273, 297, 7718, 211, 487, "Input"],
+Cell[18994, 510, 2117, 43, 703, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21148, 558, 729, 21, 78, "Input"],
+Cell[21880, 581, 1954, 40, 725, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
